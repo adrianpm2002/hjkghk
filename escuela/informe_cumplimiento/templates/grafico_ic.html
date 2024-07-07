@@ -1,0 +1,93 @@
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+<div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Informe de Cumplimiento </h2>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="container"></div>
+            
+
+            </div>
+</div>
+
+
+<script type= "application/javascript">
+Highcharts.chart('container', {
+    chart: {
+        type: 'pie'
+    },
+    title: {
+        text: 'Nivel de Cumplimiento'
+    },
+    
+    
+    
+    
+    plotOptions: {
+        series: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: [{
+                enabled: true,
+                distance: 20
+            }, {
+                enabled: true,
+                distance: -40,
+                format: '{point.percentage:.1f}%',
+                style: {
+                    fontSize: '1.2em',
+                    textOutline: 'none',
+                    opacity: 0.7
+                },
+                filter: {
+                    operator: '>',
+                    property: 'percentage',
+                    value: 10
+                }
+            }]
+        }
+    },
+    series: [
+        {
+            name: 'Tareas',
+            colorByPoint: true,
+            data: [
+                {name: 'Planificadas',
+                    y: {{total_tareas_planificadas}}
+                    },
+                
+                {name: 'Cumplidas',
+                    sliced: true,
+                    selected: true,
+                    y: {{total_cumplidas}}
+                    },
+                {
+                    name: 'Incumplidas',
+                    y: {{total_incumplidas}}
+                },
+                {
+                    name: 'Nuevas Incorporadas',
+                    y: {{total_agregadas}}
+                },
+                {
+                    name: 'Modificadas',
+                    y: {{total_modificadas}}
+                }
+            ]
+        }
+    ]
+});
+    
+</script>
+
+
+

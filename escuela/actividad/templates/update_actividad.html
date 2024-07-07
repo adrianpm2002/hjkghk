@@ -1,0 +1,98 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title> Modificar actividad </title>
+    
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'todo/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    
+    <link rel="stylesheet" href="{% static 'todo/css/sb-admin-2.css' %}"> 
+
+</head>{% endcomment %}
+<head>
+<title>Modificar actividad </title>
+</head>
+
+
+{% comment %} <section >
+        <div class="ventana_container">
+            <h2 class="ventana_title"> Modificar actividad </h2>
+            <form class="fm" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Modificar" class="ventana_close registrar">
+                
+                
+                </form>
+                <a href="{% url 'list_actividad' %}" class="ventana_close cerrar">Cerrar</a>
+        </div>
+    </section> {% endcomment %}
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Modificar actividad </h2>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'update_actividad' object.id %}" method=POST class="fm" onsubmit="validate(event)">
+            {% csrf_token %}
+            <div class="modal-body">
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger">
+                                {% for error in field.errors %}
+                                    <span class="error-message">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function validate(event) {
+        event.preventDefault(); // Evitar el envío automático del formulario
+        
+        // Obtener el valor del campo de nombre
+        let nameInput = document.getElementById('id_Nombre'); // Ajusta el ID según tu formulario
+        let nameValue = nameInput.value.trim(); // Obtener valor y eliminar espacios en blanco al inicio y final
+        
+        // Validar solo letras y numeros con una expresión regular
+        let lettersOnly = /^[A-Za-z0-9\u00C0-\u00FF\s]+$/;
+        
+        if (!lettersOnly.test(nameValue)) {
+            alert('El nombre solo puede contener letras y números.');
+            return; // Detener el flujo si la validación falla
+        }
+        // Mostrar el nombre en una alerta (opcional para depuración)
+        //console.log(Nombre ingresado: ${nameValue});
+        
+        // Enviar el formulario si la validación pasa
+        
+        event.target.submit();
+    }
+</script>
+
+

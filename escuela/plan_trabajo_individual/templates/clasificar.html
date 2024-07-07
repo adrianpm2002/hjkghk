@@ -1,0 +1,39 @@
+<head>
+<title>Clasificar plan de trabajo individual</title>
+</head>
+
+
+{% comment %} <section >
+        <div class="ventana_container">
+            <h2 class="ventana_title"> Registrar actividad </h2>
+            <form class="fm" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input  type="submit" value="Registrar" class="ventana_close registrar">
+                
+                </form>
+                <a href="{% url 'list_actividad' %}"class="ventana_close cerrar">Cerrar</a>
+        </div>
+    </section> {% endcomment %}
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Clasificar plan de trabajo individual</h2>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'clasificar' object.id%}" method=POST class = "fm">
+            {% csrf_token %}
+            <div class="modal-body">
+                {{form.as_p}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+            </form>
+            
+        </div>
+    </div>

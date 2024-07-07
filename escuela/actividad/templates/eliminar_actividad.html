@@ -1,0 +1,61 @@
+{% load static %}
+<!doctype html>
+
+<!-- Representa la raíz de un documento HTML o XHTML. Todos los demás elementos deben ser descendientes de este elemento. -->
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8">
+        
+        <title> Eliminar actividad </title>    
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Videojuegos & Desarrollo">
+        <meta name="description" content="Muestra de un formulario de acceso en HTML y CSS">
+        <meta name="keywords" content="Formulario Acceso, Formulario de LogIn">
+        
+        <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
+        
+        <!-- Link hacia el archivo de estilos css -->
+        <link rel="stylesheet" href="{% static 'user/css/login.css' %}">
+        
+        <style type="text/css">
+            
+        </style>
+        
+        <script type="text/javascript">
+        
+        </script>
+        
+    </head>
+    
+    <body>
+        
+       
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Eliminar actividad </h2>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'delete_actividad' object.id %}" method=POST class="fm">
+            {% csrf_token %}
+            <div class="modal-body"> 
+            <h5>¿Está seguro de que desea eliminar la actividad?</h5>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+            </form>
+            
+        </div>
+    </div>
+
+    </body>
+</html>

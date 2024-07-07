@@ -1,0 +1,289 @@
+{% extends 'base.html'%}
+{% block content1%}
+    <title>Actividades</title>
+
+{% endblock%}
+
+
+{% block content %}
+                    
+{% comment %} <form
+class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+<div class="input-group">
+    <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+        aria-label="Search" aria-describedby="basic-addon2" name = "q">
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="button">
+            <i class="fas fa-search fa-sm"></i>
+        </button>
+    </div>
+</div>
+</form>                {% endcomment %}
+<!--Buscar-->
+<form action="" style="max-width: 450px;">
+    <div class="buscar-box" >
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="q" value="{{ request.GET.q }}">
+        <button class="btn btn-primary search">
+            Buscar
+        </button>
+    </div>
+</form>                 
+<!--fin Buscar--> 
+<!--Inicio Mensaje de satisfactorio-->
+{% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                {% endfor %}
+              {% endif %}
+<!--Fin de Mensaje de satisfactorio-->
+
+                        
+                    
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        
+        
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+    
+                
+
+    
+                
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Actividades</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <button class ="ventana_close" type="button" onclick="abrir_modal_creacion('{% url 'create_actividad'%}')">Registrar</button>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Autor</th>
+                                            <th>Clasificación</th>
+                                            <th>Fecha</th>
+                                            <th>Opciones</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        {% for a in act %}
+                                            <tr>
+                                                <td>{{a.Nombre}}</td>
+                                                <td>{{a.Autor}}</td>
+                                                <td>{{a.Clasificacion}}</td>
+                                                <td>{{a.Fecha}}</td>
+                                                <td >
+                                                <!-- Button trigger modal -->
+                                                
+                                                <a onclick="abrir_modal_edicion('{% url 'update_actividad' a.pk %}')" style="cursor: pointer !important;">
+                                                <svg style="opacity:0.7;"width="20" fill="#000000" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 16 16">
+                                                <path d="m46.242,10.245l-4.467,4.467-8.616-8.352 4.599-4.599c2.34-2.343 6.141-2.343 8.484,0 2.343,2.34 2.343,6.138 0,8.484zm-7.083,7.08l-18.465,18.42-11.694,3.255 3.207-11.739 18.363-18.315 8.589,8.379zm7.083-7.08l-4.467,4.467-8.616-8.352 4.599-4.599c2.34-2.343 6.141-2.343 8.484,0 2.343,2.34 2.343,6.138 0,8.484zm-7.083,7.08l-18.465,18.42-11.694,3.255 3.204-11.739 18.363-18.315 8.592,8.379zm2.841,5.643l6-5.997v22.029c0,4.971-4.029,9-9,9h-30c-4.971,0-9-4.029-9-9v-30c0-4.971 4.029-9 9-9h22.026l-6.012,6h-16.014c-1.656,0-3,1.344-3,3v30c0,1.659 1.344,3 3,3h30c1.659,0 3-1.341 3-3v-16.032Z"/>
+                                                </svg>
+                                                </a>
+                                                
+                                                
+                                                <a onclick="abrir_modal_eliminacion('{% url 'delete_actividad' a.pk %}')" style="cursor: pointer !important; margin-left:15px;" >
+                                                <svg enable-background="new 0 0 91 91" height="32px" id="Layer_1" version="1.1" viewBox="0 0 91 91" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" 
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M67.305,36.442v-8.055c0-0.939-0.762-1.701-1.7-1.701H54.342v-5.524c0-0.938-0.761-1.7-1.699-1.7h-12.75   
+                                                c-0.939,0-1.701,0.762-1.701,1.7v5.524H26.93c-0.939,0-1.7,0.762-1.7,1.701v8.055c0,0.938,0.761,1.699,1.7,1.699h0.488v34.021   c0,0.938,0.761,1.7,1.699,1.7h29.481c3.595,0,6.52-2.924,6.52-6.518V38.142h0.486C66.543,38.142,67.305,37.381,67.305,36.442z  
+                                                M41.592,22.862h9.35v3.824h-9.35V22.862z M61.719,67.345c0,1.719-1.4,3.117-3.12,3.117h-27.78v-32.32l30.9,0.002V67.345z    M63.904,34.742H28.629v-4.655h11.264h12.75h11.262V34.742z"/><rect height="19.975" width="3.4" x="36.066" y="44.962"/><rect height="19.975" 
+                                                width="3.4" x="44.566" y="44.962"/><rect height="19.975" width="3.4" x="53.066" y="44.962"/></g>
+                                                </svg>
+                                                </a>
+                                                </td>
+                                                
+                                            </tr>
+                                        {% endfor %}
+                                        
+                                        
+                                            
+                                    </tbody>
+                                    
+                                </table>
+                                
+                                <!--Inicio de paginación-->
+                            <div>
+                                <div class="text-end mb-5">
+                                    {{ page_obj.paginator.count }} resultado{{ page_obj.paginator.count|pluralize }}
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="d-none d-sm-inline-block text-body">
+                                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                                    </small>
+                                
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center">
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{% url 'list_actividad' %}?page={{ page_obj.previous_page_number }}"
+                                                       aria-label="Anterior">
+                                                        <span aria-hidden="true">
+                                                            <<
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Anterior">
+                                                        <span aria-hidden="true">
+                                                            <<
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                
+                                            {% for page in page_obj.adjusted_elided_pages %}
+                                                <li class="page-item {% if page_obj.number == page %}active{% endif %}">
+                                                    <a class="page-link" href="{% url 'list_actividad' %}?page={{ page }}">
+                                                        {{ page }}
+                                                    </a>
+                                                </li>
+                                            {% endfor %}
+                                
+                                            {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{% url 'list_actividad' %}?page={{ page_obj.next_page_number }}"
+                                                       aria-label="Siguiente">
+                                                        <span aria-hidden="true">
+                                                            >>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Siguiente">
+                                                        <span aria-hidden="true">
+                                                            >>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                            </div>
+                            <!-- Fin de Paginacion-->
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <!-- /.container-fluid -->
+                <!-- Topbar Search -->
+                    
+                    
+                
+
+            </div>
+            <!-- End of Main Content -->
+
+            
+            
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- exito Modal HTML --> 
+    <div id="exitoEmployeeModal" class="modal fade"> 
+        <div class="modal-dialog"> 
+            <div class="modal-content"> 
+                    <div class="modal-header">       
+                        <h4 class="modal-title">Éxito</h4> 
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                    </div> 
+                    <div class="modal-body">      
+                        <p>Se ha creado el usuario exitosamente</p> 
+                    </div> 
+                    <div class="modal-footer"> 
+                        <input type="button" class="btn btn-success" data-dismiss="modal" value ="Aceptar"> 
+                    </div> 
+            </div> 
+        </div> 
+    </div>
+    
+    <!-- Update Modal-->
+        <div class="modal fade" id="edicion" role="dialog"> 
+        
+        </div>
+        
+    <!-- Create Modal-->
+    <div class="modal fade" id="creacion" role="dialog"> 
+        
+        </div>
+
+    <!-- Delete Modal-->
+    <div class="modal fade" id="eliminacion" role="dialog"> 
+        
+        </div>
+        
+<a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+{% endblock content %}   
+{% block extrajs %}
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    function abrir_modal_edicion(url){
+        $('#edicion').load(url,function(){
+            $(this).modal('show');
+        });
+    }
+
+    function abrir_modal_creacion(url){
+        $('#creacion').load(url,function(){
+            $(this).modal('show');
+        });
+    }
+
+    function abrir_modal_eliminacion(url){
+        $('#eliminacion').load(url,function(){
+            $(this).modal('show');
+        });
+    }
+
+    // Obtener los parámetros de la URL 
+        const params = new URLSearchParams(window.location.search); 
+        // Comprobar si existe el parámetro 'created' 
+        if (params.has('created')) { 
+            // Mostrar la notificación usando modal 
+            console.log('hola')
+            $('#exitoEmployeeModal').modal('show'); 
+        } 
+        
+        
+        
+    
+</script>
+
+{% endblock extrajs %}
+
+
